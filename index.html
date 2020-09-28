@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jeu du pendu</title>
+    </head>
+    <body>
+
+        <h1>Le Pendu !</h1>
+
+        <script>
+
+            var nom = prompt("Comment tu sappel ?");
+            console.log("Bonjour " + nom);
+
+            /*---Liste Des Mots---*/
+
+            var mots = ["mouloud", "randonnee", "bicyclette", "jacqueline", "developpe", "tirage", "excellent", "nullissime", "foulard", "priere", "haltere", "ordinateur", "clavier", "cartable", "escalier", "dictionnaire", "programme", "rarissime", "smartphone", "television", "poulie", "pantalon", "bibliotheque", "extraordinaire"];
+
+            /*---Le Mot Au Hasard---*/
+
+            var motSecret = mots[Math.floor(Math.random() * mots.length)];
+
+            /*---Le Tableau De Réponses---*/
+
+            var tableauEssais = [];
+            for (var i = 0; i < motSecret.length; i++)
+            {   tableauEssais[i] = "_";   }
+
+            var nombreLettresManquantes = motSecret.length;
+            var nombreEssais = 12;
+
+            /*--->>>---Le Code Du Jeu Est Ici---*/
+
+            while (nombreLettresManquantes > 0 && nombreEssais > 0)
+            {
+            
+            /*---(1)---Afficher La Progression Du Joueur---*/
+
+            alert(tableauEssais.join(" "));
+
+            /*---(2)---Récupérer Un Essai Du Joueur---*/
+
+            var essai = prompt("Devine une LETTRE, ou clique sur ANNULER pour QUITER LA PARTIE");
+            
+            if (essai === null)
+            {   break;  }
+                else if (essai.length !== 1)
+                {   alert("Tu dois saisir une LETTRE ..!!");  }
+
+            /*---(3)---Mettre à Jour tableauReponses Et---*/
+            /*---lettresManquantes à Chaque essai Correct---*/
+
+            else{
+                nombreEssais--;
+                essai = essai.toLocaleLowerCase(); 
+                for (var j = 0; j < motSecret.length; j++)
+                {   if (motSecret[j] === essai && tableauEssais[j] === "_")
+                    {   tableauEssais[j] = essai;
+                        nombreLettresManquantes--;
+                    }
+                }
+            }
+
+            /*---Fin De La Boucle Du Jeu---*/
+
+            }
+
+            /*---Terminer La Partie---*/
+
+            alert(tableauEssais.join(" "));
+            if (nombreEssais > 0)
+            {   alert("Félicitations ..! Le mot était bien " + motSecret);  }
+            else
+            {   alert("Ah ! Dommage.. La réponse était " + motSecret);  }
+        
+        </script>
+        
+    </body>
+</html>
